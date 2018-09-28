@@ -20,17 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-    **Note :** You can find JSON samples in the gem repo root https://github.com/MatthieuGC/lm_test
+**Note :** You can find JSON samples in the gem repo root https://github.com/MatthieuGC/lm_test
 
-    To use the gem directly as command line in your terminal and create a CSV file from a JSON one :
+To use the gem directly as command line in your terminal and create a CSV file from a JSON one :
 
     $ lm_test <json_file_path>
 
-    To use the gem into a project :
+To use the gem into a project :
 
-    ```ruby
-    LmTest::Convert.to_csv(json_file_path)
-    ```
+```ruby
+LmTest::Convert.to_csv(json_file_path)
+```
 
 ## License
 
