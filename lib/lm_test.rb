@@ -31,18 +31,29 @@ module LmTest
 
     private
 
+    # Use the first object to define CSV headers with his keys
+    # @param json the parsed json
+    # @return Array
     def self.define_headers(json)
       json.first.each_with_object([]) do |(k,v), array|
         rec_keys(array, k, v)
       end
     end
 
+    # Define values for each objects
+    # @param object the current json object to extract values
+    # @return Array
     def self.define_values(object)
       object.each_with_object([]) do |(k,v), array|
         rec_values(array, v)
       end
     end
 
+    # Recursively build the CSV header for nested objects
+    # @param keys the array containing the CSV headers made from JSON keys
+    # @param key_path the current state of the final header in construction
+    # @param value the current key value used to check if there is still a nested object
+    # @return Array
     def self.rec_keys(keys, key_path, value)
      if value.respond_to?(:values)
        value.each { |k, v| rec_keys(keys, "#{key_path}.#{k}", v) }
@@ -52,9 +63,13 @@ module LmTest
      keys
     end
 
+    # Recursively search the value for nested objects keys
+    # @param values the array containing the final values for each objects
+    # @param value the current value checked to know if it's still an object to parse
+    # @return Array
     def self.rec_values(values, value)
      if value.respond_to?(:values)
-       value.each { |k, v| rec_values(values, v) }
+       value.each { |_, v| rec_values(values, v) }
      elsif value.is_a? Array
        values << value.join(",")
      else
