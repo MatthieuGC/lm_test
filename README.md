@@ -2,6 +2,8 @@
 
 lm_test is a gem used to create a CSV file from a JSON one.
 
+**Note :** The JSON file have to provide array of objects in this first version.
+
 ## Installation
 
 Add this line to your application's Gemfile:
