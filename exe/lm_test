@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/lm_test'
+
+module LmTest
+  class Command
+
+    # Here you would be able to dispatch actions by parsing argv
+    def initialize(argv)
+      argv_errors_handling(argv)
+      LmTest::Convert.to_csv(argv[0])
+    end
+
+    private
+
+    def argv_errors_handling(argv)
+      error = if argv[0].nil?
+                'No file given in param'
+              elsif !File.exists?(argv[0])
+                %q(File not found)
+              end
+
+      return if error.nil?
+      STDERR.puts(error)
+      exit(false)
+    end
+
+  end
+end
+
+LmTest::Command.new(ARGV)
